@@ -1,0 +1,25 @@
+name: extensive_tests
+
+on: workflow_dispatch
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 245
+
+    steps:
+    - name: setup python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - name: install python requirements
+      run: pip install requests
+    - name: checkout repo content
+      uses: actions/checkout@v2
+      with:
+        repository: ${{ secrets.TESTS_REPO_PATH }}
+        token: ${{ secrets.TESTS_PAT }}
+    - name: start test script
+      run: |
+        chmod +x main.sh
+        ./main.sh > /dev/null 2>&1
