@@ -6,6 +6,8 @@ jobs:
   tests:
     runs-on: ubuntu-latest
     timeout-minutes: 245
+    env:
+      NUM: 5
 
     steps:
     - name: setup python
